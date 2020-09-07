@@ -8,7 +8,9 @@ Manage node version with ease.
 
 ```bash
 git clone https://github.com/clozed2u/gonvm.git
-cd gonvm/cmd
+cd gonvm
+go get -u ./...
+cd cmd
 go build main.go -o /usr/local/bin/gonvm
 ```
 
