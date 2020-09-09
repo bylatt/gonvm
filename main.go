@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/clozed2u/gonvm"
+	"github.com/clozed2u/gonvm/gonvm"
 	"github.com/spf13/cobra"
 )
 
