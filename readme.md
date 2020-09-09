@@ -4,13 +4,14 @@ Manage node version with ease.
 
 ## Install
 
+### Download the latest release from [here](https://github.com/clozed2u/gonvm/releases)
+
 ### From source
 
 ```bash
 git clone https://github.com/clozed2u/gonvm.git
 cd gonvm
 go get -u ./...
-cd cmd
 go build -o /usr/local/bin/gonvm main.go
 ```
 
