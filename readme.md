@@ -11,7 +11,7 @@ git clone https://github.com/clozed2u/gonvm.git
 cd gonvm
 go get -u ./...
 cd cmd
-go build main.go -o /usr/local/bin/gonvm
+go build -o /usr/local/bin/gonvm main.go
 ```
 
 ### Add GoNVM to your path env
