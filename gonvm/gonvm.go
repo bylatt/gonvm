@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 
 	"github.com/clozed2u/gonvm/utils"
 )
@@ -218,4 +219,25 @@ func Use(version string) error {
 		return err
 	}
 	return nil
+}
+
+// List all installed versions of node
+func List() ([]string, error) {
+	versions := []string{}
+	versionsPath, err := getGoNVMVersionsPath()
+	if err != nil {
+		return versions, err
+	}
+	versionsPathWithNodePrefix := fmt.Sprintf("%s/node-*", versionsPath)
+	nodes, err := filepath.Glob(versionsPathWithNodePrefix)
+	if err != nil {
+		return versions, err
+	}
+	for _, node := range nodes {
+		nodeWithoutVersionsPath := strings.ReplaceAll(node, versionsPath+"/", "")
+		versionWithVPrefix := strings.Split(nodeWithoutVersionsPath, "-")[1]
+		versionWithoutVPrefix := strings.ReplaceAll(versionWithVPrefix, "v", "")
+		versions = append(versions, versionWithoutVPrefix)
+	}
+	return versions, nil
 }

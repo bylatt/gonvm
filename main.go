@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const version = "1.0.0"
+const version = "1.1.0"
 
 func main() {
 	useCmd := &cobra.Command{
@@ -25,16 +25,33 @@ func main() {
 			}
 		},
 	}
+
+	listCmd := &cobra.Command{
+		Use:   "list",
+		Short: "List installed node versions",
+		Long:  "List all installed versions of node",
+		Run: func(cmd *cobra.Command, args []string) {
+			versions, err := gonvm.List()
+			if err != nil {
+				fmt.Printf("%s\n", err)
+			} else {
+				for _, version := range versions {
+					fmt.Println(version)
+				}
+			}
+		},
+	}
+
 	versionCmd := &cobra.Command{
 		Use:   "version",
 		Short: "GoNVM version",
 		Long:  "Show version of GoNVM",
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Printf("GoNVM %s\n", version)
+			fmt.Println(version)
 		},
 	}
 
 	rootCmd := &cobra.Command{Use: "gonvm"}
-	rootCmd.AddCommand(useCmd, versionCmd)
+	rootCmd.AddCommand(useCmd, listCmd, versionCmd)
 	rootCmd.Execute()
 }
